@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="FoodApi.css">
+</head>
+<body>
+    <!-- <button id="btn">fetch</button> -->
+    <!-- <button id="joke">joke</button> -->
+    <h1>Random food image and Jokes </h1>
+    <!-- <input type="button" id="btn" value="fetch" onclick="show()"> -->
+    <div class="data">
+        <p>Image of Food</p>
+    </div>
+    <img src=""  id="mg" alt="">
+    <div id="cont">
+     <h2>Joke</h2>
+    </div>
+    <script>
+      function Fetch(){
+         fetch(" https://foodish-api.herokuapp.com/api/")
+         .then(data=>{
+             return data.json()
+             
+         })
+         .then(data2=>{
+          
+          var d =document.getElementsByClassName("data")[0];
+          var MyImg=document.getElementById("mg");
+
+          MyImg.src=data2.image;
+          d.append(MyImg);  
+         }
+         ) 
+      }
+      function Joke(){
+         fetch(" https://v2.jokeapi.dev/joke/Programming")
+         .then(data=>{
+             console.log(data)
+             return data.json()
+         })
+         .then(data3=>{
+          console.log(data3);
+          var Div=document.getElementById("cont");
+
+          if(data3.joke!=undefined )
+          {
+           //console.log(data3.joke);
+           Div.innerHTML=data3.joke;
+          }
+          else
+          {
+              //console.log(data3.setup);
+             // console.log(data3.delivery);
+             Div.innerHTML=data3.setup;
+            
+          }      
+        }
+         ) 
+      }
+      function show()
+      {
+          Fetch();
+          Joke();
+      }
+
+    </script>
+    <input type="button" id="btn" value="click on" onclick="show()">
+</body>
+</html>
